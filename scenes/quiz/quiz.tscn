@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://3em0kla3mcc2"]
+[gd_scene load_steps=18 format=3 uid="uid://3em0kla3mcc2"]
 
 [ext_resource type="Texture2D" uid="uid://dexti8gya12jo" path="res://scenes/quiz/visuals/illustration.png" id="1_llg3p"]
 [ext_resource type="Texture2D" uid="uid://daqck3h8xlea" path="res://scenes/shared/visuals/circle_512.png" id="2_p5dwt"]
 [ext_resource type="Texture2D" uid="uid://l0enywuid1mv" path="res://scenes/shared/visuals/star.png" id="3_wcams"]
 [ext_resource type="Texture2D" uid="uid://xcl1kbnikckr" path="res://scenes/quiz/visuals/godot.png" id="4_57wd6"]
 [ext_resource type="Texture2D" uid="uid://cp635asefdrm6" path="res://scenes/quiz/visuals/quiz.png" id="5_vjlh7"]
+[ext_resource type="Texture2D" uid="uid://dh2i73mpn6n6q" path="res://scenes/quiz/visuals/undraw_Halloween_re_2kq1.png" id="6_27cfa"]
+[ext_resource type="FontFile" uid="uid://d4imt37tjbuss" path="res://scenes/shared/fonts/lato/Lato-Bold.ttf" id="7_xj432"]
+[ext_resource type="Texture2D" uid="uid://cpxamucj48d2e" path="res://scenes/quiz/visuals/coin.png" id="8_w0ea2"]
+[ext_resource type="Texture2D" uid="uid://bxxq6adnwn7nx" path="res://scenes/quiz/visuals/crown.png" id="9_5i4nv"]
 
 [sub_resource type="Gradient" id="Gradient_l8cv8"]
 colors = PackedColorArray(0.843137, 0.894118, 0.960784, 1, 0.627451, 0.658824, 0.65098, 1)
@@ -46,6 +50,25 @@ damping_max = 92.632
 scale_min = 0.4
 scale_max = 0.65
 scale_curve = SubResource("CurveTexture_vbm78")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8o7w"]
+bg_color = Color(0.666667, 0.34902, 0.988235, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.709804, 0.458824, 0.992157, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63vk3"]
+bg_color = Color(1, 0.992157, 0.0941176, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [node name="Quiz" type="Control"]
 layout_mode = 3
@@ -224,3 +247,179 @@ layout_mode = 2
 texture = ExtResource("2_p5dwt")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="Avatar" type="TextureRect" parent="Screen/VBoxContainer/AvatarContainer/CircleMask"]
+clip_children = 2
+custom_minimum_size = Vector2(0, 225)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.799
+offset_top = -112.5
+offset_right = 128.799
+offset_bottom = 112.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_27cfa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Screen/VBoxContainer/AvatarContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.294118, 0.152941, 0.439216, 0.803922)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("7_xj432")
+theme_override_font_sizes/font_size = 40
+text = "NICKNAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Screen/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+
+[node name="ProgressContainer" type="HBoxContainer" parent="Screen/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Panel" type="Panel" parent="Screen/VBoxContainer/ProgressContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8o7w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/VBoxContainer/ProgressContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -13.5
+offset_right = 75.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="ProgressBar" type="ProgressBar" parent="Screen/VBoxContainer/ProgressContainer/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_63vk3")
+show_percentage = false
+
+[node name="Coin" type="TextureRect" parent="Screen/VBoxContainer/ProgressContainer/Panel/HBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -36.0
+offset_right = 29.0
+offset_bottom = 36.0
+grow_vertical = 2
+texture = ExtResource("8_w0ea2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="Screen/VBoxContainer/ProgressContainer/Panel/HBoxContainer/ProgressBar/Coin"]
+self_modulate = Color(0.411765, 0.411765, 0.411765, 0.588235)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_w0ea2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Screen/VBoxContainer/ProgressContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_xj432")
+theme_override_font_sizes/font_size = 19
+text = "800"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel2" type="Panel" parent="Screen/VBoxContainer/ProgressContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8o7w")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/VBoxContainer/ProgressContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -13.5
+offset_right = 75.0
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="ProgressBar" type="ProgressBar" parent="Screen/VBoxContainer/ProgressContainer/Panel2/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_63vk3")
+show_percentage = false
+
+[node name="Coin" type="TextureRect" parent="Screen/VBoxContainer/ProgressContainer/Panel2/HBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -36.0
+offset_right = 29.0
+offset_bottom = 36.0
+grow_vertical = 2
+rotation = -0.279253
+texture = ExtResource("9_5i4nv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="Screen/VBoxContainer/ProgressContainer/Panel2/HBoxContainer/ProgressBar/Coin"]
+self_modulate = Color(0.411765, 0.411765, 0.411765, 0.588235)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_5i4nv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Screen/VBoxContainer/ProgressContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_xj432")
+theme_override_font_sizes/font_size = 19
+text = "666"
+horizontal_alignment = 1
+vertical_alignment = 1
