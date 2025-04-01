@@ -66,6 +66,11 @@ func _on_toggled(button_pressed: bool) -> void:
 		tween_color.parallel().tween_property(eyes_on, "self_modulate:a", 1.0, duration)
 		tween_color.parallel().tween_property(head, "rotation_degrees", 360.0, duration)
 		
+		tween_squish.tween_property(toggle, "size", Vector2(180.0, 95.0), duration/2.0).set_ease(Tween.EASE_IN)
+		tween_squish.parallel().tween_property(toggle, "position", Vector2(180.0-138.0, (138.0-95.0)/2.0), duration/2.0).set_ease(Tween.EASE_IN)
+		tween_squish.tween_property(toggle, "size", Vector2(138.0, 138.0), duration*2.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween_squish.parallel().tween_property(toggle, "position", Vector2.ZERO, duration*2.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		
 	else:
 		tween_color.tween_property(bg_on, "position:x", -bg_on.size.x, duration*1.3)
 		tween_color.parallel().tween_property(toggle, "self_modulate", color_off_2, duration)
@@ -75,6 +80,11 @@ func _on_toggled(button_pressed: bool) -> void:
 		tween_color.parallel().tween_property(mouth, "self_modulate", color_off_2, duration)
 		tween_color.parallel().tween_property(eyes_on, "self_modulate:a", 0.0, duration)
 		tween_color.parallel().tween_property(head, "rotation_degrees", 0.0, duration)
+		
+		tween_squish.tween_property(toggle, "size", Vector2(180.0, 95.0), duration/2.0).set_ease(Tween.EASE_IN)
+		tween_squish.parallel().tween_property(toggle, "position", Vector2(-(180.0-138.0), (138.0-95.0)/2.0), duration/2.0).set_ease(Tween.EASE_IN)
+		tween_squish.tween_property(toggle, "size", Vector2(138.0, 138.0), duration*2.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween_squish.parallel().tween_property(toggle, "position", Vector2.ZERO, duration*2.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 
 func _on_mouse_entered() -> void:
