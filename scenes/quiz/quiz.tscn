@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://3em0kla3mcc2"]
+[gd_scene load_steps=25 format=3 uid="uid://3em0kla3mcc2"]
 
 [ext_resource type="Texture2D" uid="uid://dexti8gya12jo" path="res://scenes/quiz/visuals/illustration.png" id="1_llg3p"]
 [ext_resource type="Texture2D" uid="uid://daqck3h8xlea" path="res://scenes/shared/visuals/circle_512.png" id="2_p5dwt"]
@@ -9,6 +9,8 @@
 [ext_resource type="FontFile" uid="uid://d4imt37tjbuss" path="res://scenes/shared/fonts/lato/Lato-Bold.ttf" id="7_xj432"]
 [ext_resource type="Texture2D" uid="uid://cpxamucj48d2e" path="res://scenes/quiz/visuals/coin.png" id="8_w0ea2"]
 [ext_resource type="Texture2D" uid="uid://bxxq6adnwn7nx" path="res://scenes/quiz/visuals/crown.png" id="9_5i4nv"]
+[ext_resource type="Texture2D" uid="uid://chuj6ex4pevjd" path="res://scenes/shared/icons/icons8-person-96.png" id="10_nml0x"]
+[ext_resource type="Texture2D" uid="uid://bbm5txs4nl8g0" path="res://scenes/shared/icons/icons8-people-96.png" id="11_atwl2"]
 
 [sub_resource type="Gradient" id="Gradient_l8cv8"]
 colors = PackedColorArray(0.843137, 0.894118, 0.960784, 1, 0.627451, 0.658824, 0.65098, 1)
@@ -69,6 +71,27 @@ corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7hqo"]
+bg_color = Color(0.996078, 0.988235, 0.0941176, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.705882, 0.458824, 0.988235, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dcxi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yts3e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_agkq6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3t2y"]
 
 [node name="Quiz" type="Control"]
 layout_mode = 3
@@ -421,5 +444,92 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("7_xj432")
 theme_override_font_sizes/font_size = 19
 text = "666"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomContainer" type="VBoxContainer" parent="Screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="Screen/VBoxContainer/BottomContainer"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7hqo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6dcxi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yts3e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_agkq6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n3t2y")
+icon_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/VBoxContainer/BottomContainer/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -22.5
+offset_right = 119.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="Screen/VBoxContainer/BottomContainer/Button/HBoxContainer"]
+self_modulate = Color(0.513726, 0.282353, 0.839216, 1)
+layout_mode = 2
+texture = ExtResource("10_nml0x")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Screen/VBoxContainer/BottomContainer/Button/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.513726, 0.282353, 0.839216, 1)
+theme_override_fonts/font = ExtResource("7_xj432")
+theme_override_font_sizes/font_size = 24
+text = "SINGLE GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="Screen/VBoxContainer/BottomContainer"]
+custom_minimum_size = Vector2(0, 85)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_e7hqo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6dcxi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yts3e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_agkq6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n3t2y")
+icon_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/VBoxContainer/BottomContainer/Button2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -22.5
+offset_right = 119.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="TextureRect" type="TextureRect" parent="Screen/VBoxContainer/BottomContainer/Button2/HBoxContainer"]
+self_modulate = Color(0.513726, 0.282353, 0.839216, 1)
+layout_mode = 2
+texture = ExtResource("11_atwl2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Screen/VBoxContainer/BottomContainer/Button2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.513726, 0.282353, 0.839216, 1)
+theme_override_fonts/font = ExtResource("7_xj432")
+theme_override_font_sizes/font_size = 24
+text = "MULTIPLAYER GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
