@@ -1,0 +1,214 @@
+[gd_scene load_steps=17 format=3 uid="uid://c4v0vlbqfw8r4"]
+
+[ext_resource type="Texture2D" uid="uid://058saqmbygkh" path="res://scenes/level_up_again/assets/rounded_rect.png" id="1_bpcqj"]
+[ext_resource type="FontFile" uid="uid://cylpm0qnoh3vr" path="res://scenes/shared/fonts/signika/Signika-Medium.ttf" id="2_v82b8"]
+[ext_resource type="Texture2D" uid="uid://bgpsdwjtbyhfw" path="res://scenes/level_up_again/assets/rays.png" id="3_p20ll"]
+[ext_resource type="Shader" path="res://scenes/shared/shaders/fake_3D.gdshader" id="4_kjvuk"]
+[ext_resource type="Texture2D" uid="uid://b268tkv6iudcu" path="res://scenes/level_up_again/assets/shield.png" id="5_a3vgf"]
+[ext_resource type="FontFile" uid="uid://deo8melbvd5n0" path="res://scenes/shared/fonts/signika/Signika-Bold.ttf" id="6_ea1qn"]
+[ext_resource type="Texture2D" uid="uid://bmf5nxw5ae7fv" path="res://scenes/level_up_again/assets/wing.png" id="7_jltxa"]
+[ext_resource type="Texture2D" uid="uid://dwaf70gb5bprs" path="res://scenes/level_up_again/assets/wing_l.png" id="8_8wlbs"]
+
+[sub_resource type="Gradient" id="Gradient_1vt0a"]
+colors = PackedColorArray(0.160784, 0.298039, 0.607843, 1, 0.101961, 0.219608, 0.494118, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lxa0j"]
+gradient = SubResource("Gradient_1vt0a")
+width = 1920
+height = 1080
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ybojx"]
+offsets = PackedFloat32Array(0, 0.201031, 0.762887, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.541176, 1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lqcfa"]
+gradient = SubResource("Gradient_ybojx")
+
+[sub_resource type="Curve" id="Curve_okdm2"]
+_data = [Vector2(0, 0.0110382), 0.0, 0.0, 0, 0, Vector2(0.488525, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wm6kk"]
+curve = SubResource("Curve_okdm2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kn4jf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, -15, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_wm6kk")
+color_ramp = SubResource("GradientTexture1D_lqcfa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3mdy"]
+shader = ExtResource("4_kjvuk")
+shader_parameter/rect_size = Vector2(582, 496)
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="LevelUpAgain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lxa0j")
+
+[node name="BackgroundParticles" type="GPUParticles2D" parent="."]
+position = Vector2(960, 540)
+amount = 31
+process_material = SubResource("ParticleProcessMaterial_kn4jf")
+texture = ExtResource("1_bpcqj")
+lifetime = 4.5
+randomness = 0.36
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.5
+offset_top = 45.0
+offset_right = 116.5
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_v82b8")
+theme_override_font_sizes/font_size = 71
+text = "You have reached a new level!"
+horizontal_alignment = 1
+
+[node name="Anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -347.0
+offset_top = -408.0
+offset_right = 347.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rays" type="TextureRect" parent="Anchor"]
+self_modulate = Color(1, 0.839216, 0.329412, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -461.5
+offset_top = -431.0
+offset_right = 461.5
+offset_bottom = 431.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(461.5, 431)
+texture = ExtResource("3_p20ll")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Shield" type="TextureRect" parent="Anchor"]
+material = SubResource("ShaderMaterial_b3mdy")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.0
+offset_top = -248.0
+offset_right = 291.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(291, 248)
+texture = ExtResource("5_a3vgf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Level" type="Label" parent="Anchor/Shield"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_top = 134.0
+offset_right = 106.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.329412, 1)
+theme_override_fonts/font = ExtResource("2_v82b8")
+theme_override_font_sizes/font_size = 60
+text = "LEVEL"
+horizontal_alignment = 1
+
+[node name="LabelNb" type="Label" parent="Anchor/Shield"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -89.0
+offset_right = 99.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ea1qn")
+theme_override_font_sizes/font_size = 184
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WingR" type="TextureRect" parent="Anchor/Shield"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -128.0
+offset_right = 119.0
+offset_bottom = 150.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("7_jltxa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="WingL" type="TextureRect" parent="Anchor/Shield"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -128.0
+offset_right = 174.0
+offset_bottom = 150.0
+grow_vertical = 2
+texture = ExtResource("8_8wlbs")
+expand_mode = 3
+stretch_mode = 5
