@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4v0vlbqfw8r4"]
+[gd_scene load_steps=30 format=3 uid="uid://c4v0vlbqfw8r4"]
 
 [ext_resource type="Texture2D" uid="uid://058saqmbygkh" path="res://scenes/level_up_again/assets/rounded_rect.png" id="1_bpcqj"]
 [ext_resource type="FontFile" uid="uid://cylpm0qnoh3vr" path="res://scenes/shared/fonts/signika/Signika-Medium.ttf" id="2_v82b8"]
@@ -8,6 +8,11 @@
 [ext_resource type="FontFile" uid="uid://deo8melbvd5n0" path="res://scenes/shared/fonts/signika/Signika-Bold.ttf" id="6_ea1qn"]
 [ext_resource type="Texture2D" uid="uid://bmf5nxw5ae7fv" path="res://scenes/level_up_again/assets/wing.png" id="7_jltxa"]
 [ext_resource type="Texture2D" uid="uid://dwaf70gb5bprs" path="res://scenes/level_up_again/assets/wing_l.png" id="8_8wlbs"]
+[ext_resource type="Texture2D" uid="uid://cfpvfr4mwnxv0" path="res://scenes/level_up_again/assets/ribbon.png" id="9_03twi"]
+[ext_resource type="Texture2D" uid="uid://bfm3424lwa44u" path="res://scenes/level_up_again/assets/bomb.png" id="10_cq66n"]
+[ext_resource type="FontFile" uid="uid://dec5ome6qoy4" path="res://scenes/shared/fonts/signika/Signika-Regular.ttf" id="11_pxffu"]
+[ext_resource type="Texture2D" uid="uid://k4polvx64tqe" path="res://scenes/level_up_again/assets/clover.png" id="12_c523s"]
+[ext_resource type="Texture2D" uid="uid://bg04a42hq5l36" path="res://scenes/level_up_again/assets/heart.png" id="13_qi3fl"]
 
 [sub_resource type="Gradient" id="Gradient_1vt0a"]
 colors = PackedColorArray(0.160784, 0.298039, 0.607843, 1, 0.101961, 0.219608, 0.494118, 1)
@@ -44,6 +49,47 @@ scale_max = 0.3
 scale_curve = SubResource("CurveTexture_wm6kk")
 color_ramp = SubResource("GradientTexture1D_lqcfa")
 
+[sub_resource type="Gradient" id="Gradient_l37c3"]
+offsets = PackedFloat32Array(0, 0.556701, 1)
+colors = PackedColorArray(1, 1, 1, 0.870588, 1, 1, 1, 0.384314, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u61sr"]
+gradient = SubResource("Gradient_l37c3")
+
+[sub_resource type="Curve" id="Curve_spbx0"]
+_data = [Vector2(0, 0.437649), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l1b3t"]
+curve = SubResource("Curve_spbx0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kv2ot"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, -23, 0)
+damping_min = 25.0
+damping_max = 25.0
+scale_min = 1.3
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_l1b3t")
+color_ramp = SubResource("GradientTexture1D_u61sr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4ctro"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, -23, 0)
+damping_min = 25.0
+damping_max = 25.0
+scale_min = 1.3
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_l1b3t")
+color_ramp = SubResource("GradientTexture1D_u61sr")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b3mdy"]
 shader = ExtResource("4_kjvuk")
 shader_parameter/rect_size = Vector2(582, 496)
@@ -52,6 +98,21 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plbm3"]
+bg_color = Color(0.0784314, 0.164706, 0.352941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.231373, 0.454902, 0.992157, 0.760784)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4ivs"]
+bg_color = Color(0.203922, 0.403922, 0.882353, 1)
 
 [node name="LevelUpAgain" type="Control"]
 layout_mode = 3
@@ -77,6 +138,20 @@ process_material = SubResource("ParticleProcessMaterial_kn4jf")
 texture = ExtResource("1_bpcqj")
 lifetime = 4.5
 randomness = 0.36
+
+[node name="WingParticles" type="GPUParticles2D" parent="."]
+position = Vector2(1200, 392)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_kv2ot")
+texture = ExtResource("7_jltxa")
+lifetime = 1.6
+
+[node name="WingParticles2" type="GPUParticles2D" parent="."]
+position = Vector2(712, 392)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_4ctro")
+texture = ExtResource("8_8wlbs")
+lifetime = 1.6
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
@@ -212,3 +287,199 @@ grow_vertical = 2
 texture = ExtResource("8_8wlbs")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="LevelUp" type="Label" parent="Anchor"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -4.0
+offset_right = 302.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.839216, 0.329412, 1)
+theme_override_fonts/font = ExtResource("6_ea1qn")
+theme_override_font_sizes/font_size = 111
+text = "LEVEL UP!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ribbon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -266.5
+offset_top = -273.0
+offset_right = 267.5
+offset_bottom = -161.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(267, 56)
+texture = ExtResource("9_03twi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Rewards" type="Label" parent="Ribbon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -36.0
+offset_right = 102.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_v82b8")
+theme_override_font_sizes/font_size = 34
+text = "REWARDS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -162.0
+offset_right = 48.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Button" type="Button" parent="ButtonsContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(96, 112)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_plbm3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_plbm3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_plbm3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_plbm3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_plbm3")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonsContainer/Button"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+texture = ExtResource("10_cq66n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="ButtonsContainer/Button"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4ivs")
+
+[node name="Label" type="Label" parent="ButtonsContainer/Button/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_pxffu")
+theme_override_font_sizes/font_size = 20
+text = "Bomb"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="ButtonsContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(96, 112)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_plbm3")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonsContainer/Button2"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+texture = ExtResource("12_c523s")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="ButtonsContainer/Button2"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4ivs")
+
+[node name="Label" type="Label" parent="ButtonsContainer/Button2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_pxffu")
+theme_override_font_sizes/font_size = 20
+text = "Clover"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="ButtonsContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(96, 112)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_plbm3")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonsContainer/Button3"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+texture = ExtResource("13_qi3fl")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="ButtonsContainer/Button3"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w4ivs")
+
+[node name="Label" type="Label" parent="ButtonsContainer/Button3/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_pxffu")
+theme_override_font_sizes/font_size = 20
+text = "Heart"
+horizontal_alignment = 1
+vertical_alignment = 1
